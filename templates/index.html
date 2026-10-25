@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AKIRA - Accessible Knowledge & Information Retrieval Assistant. An accessible, multi-modal knowledge portal with voice search, synchronized karaoke audio, dyslexia font support, and study flashcards.">
+    <title>AKIRA — Accessible Knowledge & Information Retrieval Assistant</title>
+    
+    <!-- Core & Accessibility Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accessibility.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="font-scale-md">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Accessible Header & Navigation -->
+    <header class="app-header" role="banner">
+        <div class="header-container">
+            <a href="/" class="brand-wrapper" aria-label="AKIRA Home">
+                <div class="brand-icon" aria-hidden="true">A</div>
+                <div class="brand-info">
+                    <h1>AKIRA</h1>
+                    <p class="brand-tagline">Accessible Knowledge & Information Retrieval Assistant</p>
+                </div>
+            </a>
+
+            <!-- Accessibility Toolbar -->
+            <nav class="a11y-toolbar" aria-label="Accessibility & Display Settings">
+                <!-- Dyslexia Font Toggle -->
+                <button type="button" id="toggle-dyslexia" class="a11y-btn" aria-pressed="false" title="Toggle Dyslexia-friendly reading font">
+                    <span aria-hidden="true">📖</span> Dyslexic Font
+                </button>
+
+                <!-- Font Sizing Controls -->
+                <div class="font-size-group" role="group" aria-label="Text sizing controls">
+                    <button type="button" id="font-decrease" class="a11y-btn" title="Decrease font size" aria-label="Decrease font size">A-</button>
+                    <button type="button" id="font-reset" class="a11y-btn" title="Reset font size" aria-label="Reset font size">A</button>
+                    <button type="button" id="font-increase" class="a11y-btn" title="Increase font size" aria-label="Increase font size">A+</button>
+                </div>
+
+                <!-- Theme Selection Dropdown -->
+                <select id="theme-select" class="theme-select" aria-label="Select display contrast theme">
+                    <option value="light">☀️ Light Theme</option>
+                    <option value="dark">🌙 Dark Theme</option>
+                    <option value="high-contrast">⚡ High Contrast (AAA)</option>
+                    <option value="sepia">📜 Sepia / Warm Paper</option>
+                </select>
+
+                <!-- Bookmarks & History Drawer Toggle -->
+                <button type="button" id="drawer-open-btn" class="a11y-btn" aria-label="Open History and Bookmarks Drawer">
+                    <span aria-hidden="true">📚</span> Library
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main id="main-content" class="main-wrapper" role="main">
+        <!-- Search Hero Section -->
+        <section class="search-hero" aria-label="Knowledge Search Section">
+            <h2 class="search-headline">Learn Anything, Your Way</h2>
+            <p class="search-subtext">Hands-free voice query, synchronized audio playback, and instant revision flashcards.</p>
+
+            <form id="search-form" class="search-box-form" role="search" aria-label="Wikipedia search">
+                <!-- Voice Input Microphone Button -->
+                <button type="button" id="mic-btn" class="mic-btn" title="Voice Search (Click to Speak or press Alt+M)" aria-label="Start Voice Search">
+                    🎤
+                </button>
+
+                <!-- Text Search Input -->
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="search-input" 
+                    placeholder="Search any topic, concept, or person... (e.g., Quantum Computing)" 
+                    autocomplete="off"
+                    aria-label="Search encyclopedia topic"
+                    required
+                >
+
+                <!-- Clear input button -->
+                <button type="button" id="clear-btn" class="clear-btn" title="Clear search text" aria-label="Clear input text">&times;</button>
+
+                <!-- Search Submit Button -->
+                <button type="submit" id="search-submit-btn" class="search-submit-btn" aria-label="Submit search">
+                    <span>🔍 Search</span>
+                </button>
+            </form>
+
+            <!-- Quick Suggested Topic Chips -->
+            <div class="topic-chips" role="region" aria-label="Recommended Topics">
+                <span class="chip-label">Try exploring:</span>
+                <button type="button" class="topic-chip" data-topic="Artificial intelligence">Artificial Intelligence</button>
+                <button type="button" class="topic-chip" data-topic="Quantum computing">Quantum Computing</button>
+                <button type="button" class="topic-chip" data-topic="Alan Turing">Alan Turing</button>
+                <button type="button" class="topic-chip" data-topic="James Webb Space Telescope">James Webb Telescope</button>
+                <button type="button" class="topic-chip" data-topic="Neurodiversity">Neurodiversity</button>
+                <button type="button" class="topic-chip" data-topic="Renewable energy">Renewable Energy</button>
+            </div>
+        </section>
+
+        <!-- Disambiguation / Not Found Alert Card -->
+        <section id="alert-card" class="alert-card" style="display: none;" role="alert" aria-live="polite">
+            <div class="alert-header">
+                <span aria-hidden="true">💡</span>
+                <span id="alert-title">Topic Notice</span>
+            </div>
+            <p id="alert-message">Notice details will appear here.</p>
+            <div id="disambig-list" class="disambig-list" role="list"></div>
+        </section>
+
+        <!-- Primary Article Container -->
+        <article id="article-container" class="article-container" style="display: none;" aria-label="Article content and study tools">
+            <!-- Article Hero Banner -->
+            <div class="article-hero">
+                <div class="article-meta">
+                    <div class="article-title-row">
+                        <h2 id="article-title" class="article-title">Article Title</h2>
+                        <span id="reading-time-badge" class="badge-tag">2 min audio</span>
+                    </div>
+
+                    <div class="article-subtitle">
+                        <span>Source:</span>
+                        <a id="wiki-external-link" class="wiki-link" href="#" target="_blank" rel="noopener noreferrer">
+                            Wikipedia Official Entry ↗
+                        </a>
+                    </div>
+
+                    <!-- Article Actions (Bookmark, Download Study PDF, Download Markdown Notes) -->
+                    <div class="article-actions" role="toolbar" aria-label="Article Actions">
+                        <button type="button" id="bookmark-btn" class="action-btn" aria-label="Bookmark this article">
+                            <span>☆ Bookmark</span>
+                        </button>
+                        <button type="button" id="export-pdf-btn" class="action-btn" aria-label="Download Study PDF Guide">
+                            <span>📄 Download Study PDF</span>
+                        </button>
+                        <button type="button" id="export-notes-btn" class="action-btn" aria-label="Download Markdown Notes">
+                            <span>📝 Study Notes (.md)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Page Thumbnail -->
+                <div id="article-thumb-wrapper" class="article-thumbnail-wrapper" style="display: none;">
+                    <img id="article-thumb" class="article-thumbnail" src="" alt="Topic illustration">
+                </div>
+            </div>
+
+            <!-- Knowledge Mode Tabs -->
+            <nav class="tabs-nav" role="tablist" aria-label="Knowledge Views">
+                <button type="button" class="tab-btn active" data-tab="recap" role="tab" aria-selected="true" id="tab-recap">
+                    <span aria-hidden="true">🎧</span> Executive Audio Recap
+                </button>
+                <button type="button" class="tab-btn" data-tab="takeaways" role="tab" aria-selected="false" id="tab-takeaways">
+                    <span aria-hidden="true">📌</span> Key Takeaways
+                </button>
+                <button type="button" class="tab-btn" data-tab="flashcards" role="tab" aria-selected="false" id="tab-flashcards">
+                    <span aria-hidden="true">🃏</span> Study Flashcards
+                </button>
+                <button type="button" class="tab-btn" data-tab="full" role="tab" aria-selected="false" id="tab-full">
+                    <span aria-hidden="true">📖</span> Full Clean Text
+                </button>
+            </nav>
+
+            <!-- Tab Panels -->
+            <div class="tab-content">
+                <!-- Panel 1: Executive Audio Recap with Karaoke Highlighting -->
+                <section id="panel-recap" class="tab-panel active" role="tabpanel" aria-labelledby="tab-recap">
+                    <!-- Spoken sentences rendered here with karaoke spans -->
+                </section>
+
+                <!-- Panel 2: Key Bullet Takeaways -->
+                <section id="panel-takeaways" class="tab-panel" role="tabpanel" aria-labelledby="tab-takeaways">
+                    <ul id="takeaways-list" class="takeaways-list"></ul>
+                </section>
+
+                <!-- Panel 3: Interactive 3D Flashcards -->
+                <section id="panel-flashcards" class="tab-panel" role="tabpanel" aria-labelledby="tab-flashcards">
+                    <div class="flashcards-container">
+                        <div class="flashcards-header">
+                            <h3>Key Concepts & Revision Cards</h3>
+                            <span class="flashcards-instruction">Click card or press Space to reveal answer</span>
+                        </div>
+                        <div id="flashcards-grid" class="flashcards-grid"></div>
+                    </div>
+                </section>
+
+                <!-- Panel 4: Full Article -->
+                <section id="panel-full" class="tab-panel" role="tabpanel" aria-labelledby="tab-full">
+                    <!-- Cleaned article sentences rendered here -->
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- Sticky Audio Control Deck -->
+    <div id="audio-deck" class="audio-deck-bar" role="region" aria-label="Text-to-Speech Audio Player">
+        <div class="audio-deck-container">
+            <!-- Audio Buttons: Play, Pause, Stop -->
+            <div class="audio-controls-group">
+                <button type="button" id="audio-play-btn" class="audio-btn play-btn" title="Play / Resume (Space)" aria-label="Play Audio">
+                    ▶️
+                </button>
+                <button type="button" id="audio-pause-btn" class="audio-btn" title="Pause Speech" aria-label="Pause Speech">
+                    ⏸️
+                </button>
+                <button type="button" id="audio-stop-btn" class="audio-btn" title="Stop Speech (Esc)" aria-label="Stop Speech">
+                    ⏹️
+                </button>
+            </div>
+
+            <!-- Audio Status & Karaoke Progress -->
+            <div class="audio-info-group">
+                <div class="audio-status-row">
+                    <span id="audio-status-label" class="audio-status-label" aria-live="polite">⏹️ Ready</span>
+                </div>
+                <div class="audio-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div id="audio-progress-bar" class="audio-progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- Audio Settings: Speed Slider & Voice Selector -->
+            <div class="audio-settings-group">
+                <div class="speed-control">
+                    <label for="speed-slider">Speed:</label>
+                    <input type="range" id="speed-slider" class="speed-slider" min="0.75" max="1.5" step="0.05" value="1.0" aria-label="Speech playback rate">
+                    <span id="speed-val" class="speed-val">1.0x</span>
+                    <div class="speed-presets" role="group" aria-label="Quick speed presets">
+                        <button type="button" class="speed-preset-btn" data-speed="0.75">0.75x</button>
+                        <button type="button" class="speed-preset-btn active" data-speed="1.0">1.0x</button>
+                        <button type="button" class="speed-preset-btn" data-speed="1.25">1.25x</button>
+                        <button type="button" class="speed-preset-btn" data-speed="1.5">1.5x</button>
+                    </div>
+                </div>
+
+                <select id="voice-select" class="voice-select" aria-label="Select voice">
+                    <option value="">Default System Voice</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Drawer: History & Bookmarks -->
+    <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+    <aside id="side-drawer" class="side-drawer" role="dialog" aria-modal="true" aria-label="Search History and Bookmarks">
+        <div class="drawer-header">
+            <h3 class="drawer-title">Study Library</h3>
+            <button type="button" id="drawer-close-btn" class="drawer-close-btn" aria-label="Close library drawer">&times;</button>
+        </div>
+
+        <div class="drawer-tabs" role="tablist">
+            <button type="button" class="drawer-tab active" data-drawer-tab="history">Search History</button>
+            <button type="button" class="drawer-tab" data-drawer-tab="bookmarks">Bookmarks</button>
+        </div>
+
+        <div class="drawer-body">
+            <ul id="history-list" class="drawer-list"></ul>
+            <ul id="bookmarks-list" class="drawer-list" style="display: none;"></ul>
+        </div>
+
+        <div class="drawer-footer">
+            <button type="button" id="clear-history-btn" class="a11y-btn" style="color: var(--danger-color);">Clear History</button>
+        </div>
+    </aside>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Modular Application Scripts -->
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/speech.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+

@@ -1,0 +1,173 @@
+/* ==========================================================================
+   AKIRA Accessibility Stylesheet (accessibility.css)
+   Compliant with WCAG 2.1 AAA Accessibility Standards
+   ========================================================================== */
+
+/* 1. Skip to Content Link (Keyboard Navigation) */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 12px;
+    background: #000000;
+    color: #ffffff;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    z-index: 99999;
+    border-radius: 0 0 6px 6px;
+    border: 2px solid #ffcc00;
+    transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+/* 2. Screen Reader Only Utility */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* 3. Universal Focus Indicators for Keyboard Navigation */
+:focus-visible {
+    outline: 3px solid var(--focus-ring, #2563eb) !important;
+    outline-offset: 3px !important;
+}
+
+/* 4. Dyslexia-Friendly Mode */
+body.font-dyslexia {
+    font-family: "OpenDyslexic", "Comic Neue", "Comic Sans MS", "Lexend", sans-serif !important;
+    letter-spacing: 0.05em !important;
+    word-spacing: 0.12em !important;
+    line-height: 1.85 !important;
+}
+
+body.font-dyslexia p,
+body.font-dyslexia li,
+body.font-dyslexia .karaoke-sentence {
+    letter-spacing: 0.055em !important;
+    word-spacing: 0.14em !important;
+    line-height: 1.9 !important;
+}
+
+/* 5. Font Sizing Scale */
+body.font-scale-sm {
+    font-size: 14px;
+}
+body.font-scale-md {
+    font-size: 16px;
+}
+body.font-scale-lg {
+    font-size: 19px;
+}
+body.font-scale-xl {
+    font-size: 22px;
+}
+
+body.font-scale-lg .main-title {
+    font-size: 2.2rem;
+}
+body.font-scale-xl .main-title {
+    font-size: 2.5rem;
+}
+
+/* 6. High Contrast Dark Mode */
+body.theme-high-contrast {
+    --bg-primary: #000000;
+    --bg-surface: #0a0a0a;
+    --bg-card: #121212;
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --text-muted: #cbd5e1;
+    --border-color: #ffe600;
+    --accent-primary: #ffe600;
+    --accent-hover: #ffd000;
+    --accent-text: #000000;
+    --focus-ring: #ffe600;
+    --highlight-bg: #ffe600;
+    --highlight-text: #000000;
+    --chip-bg: #1e1e1e;
+    --chip-border: #ffe600;
+    --card-shadow: 0 0 0 2px #ffe600;
+}
+
+body.theme-high-contrast a {
+    color: #ffe600 !important;
+    text-decoration: underline !important;
+}
+
+body.theme-high-contrast button {
+    border-color: #ffe600 !important;
+}
+
+/* 7. Sepia / Warm Paper Mode (Reduces Eye Fatigue) */
+body.theme-sepia {
+    --bg-primary: #f5edd6;
+    --bg-surface: #ede3c4;
+    --bg-card: #fcf6e8;
+    --text-primary: #3d3121;
+    --text-secondary: #574630;
+    --text-muted: #78644b;
+    --border-color: #d1c4a5;
+    --accent-primary: #8b5a2b;
+    --accent-hover: #724720;
+    --accent-text: #ffffff;
+    --focus-ring: #8b5a2b;
+    --highlight-bg: #ffe494;
+    --highlight-text: #2d1f0d;
+    --chip-bg: #e6dac0;
+    --chip-border: #b8a88c;
+    --card-shadow: 0 2px 8px rgba(90, 70, 40, 0.1);
+}
+
+/* 8. Synchronized Sentence Highlighting ("Karaoke" Mode) */
+.karaoke-sentence {
+    display: inline;
+    padding: 3px 6px;
+    margin: 1px 2px;
+    border-radius: 4px;
+    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.karaoke-sentence:hover {
+    background-color: rgba(37, 99, 235, 0.08);
+}
+
+.karaoke-sentence.active-speech {
+    background-color: var(--highlight-bg, #fef08a) !important;
+    color: var(--highlight-text, #1e293b) !important;
+    box-shadow: 0 0 0 2px var(--border-color, #eab308);
+    font-weight: 600;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Active sentence in High-Contrast Mode */
+body.theme-high-contrast .karaoke-sentence.active-speech {
+    background-color: #ffe600 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 0 3px #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* 9. Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
