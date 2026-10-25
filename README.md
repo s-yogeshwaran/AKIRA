@@ -6,60 +6,124 @@
 [![Web Speech API](https://img.shields.io/badge/speech-Web%20Speech%20API-orange.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**AKIRA** (*Accessible Knowledge & Information Retrieval Assistant*) is an open-source, multi-modal knowledge portal and study assistant. It transforms dense online encyclopedic entries into concise audio summaries, high-yield bullet takeaways, interactive 3D study flashcards, and downloadable study notes.
+**AKIRA** (*Accessible Knowledge & Information Retrieval Assistant*) is an open-source, multi-modal knowledge portal and assistive study assistant. It transforms dense online encyclopedic entries into concise audio summaries, high-yield bullet takeaways, interactive 3D study flashcards, and exportable study notes.
 
-Designed with accessibility at its core, AKIRA features **two-way voice navigation** (Speech-to-Text and Text-to-Speech), **synchronized sentence-level "karaoke" highlighting** for dyslexic and auditory learners, and an **academic SafeSearch filter**.
-
----
-
-## 🌟 Key Features
-
-- **🎙️ Two-Way Voice Navigation:**
-  - **Voice Search (Speech-to-Text):** Click-to-speak voice queries with live real-time transcription feedback and natural language filler word stripping (*"what is"*, *"tell me about"*).
-  - **Interactive Audio Player (Text-to-Speech):** Play, Pause, Resume, Stop controls with dynamic live speed regulation (`0.75x`, `1.0x`, `1.25x`, `1.5x`) and native voice accent selection.
-- **✨ Synchronized "Karaoke" Sentence Tracking:**
-  - Visually highlights each sentence in real-time as it is spoken aloud, helping individuals with dyslexia, ADHD, or visual tracking difficulties read along.
-- **🧠 Multi-Level Knowledge Synthesis:**
-  - **Executive Audio Recap:** 2–3 sentence brief optimized for a 1-minute audio overview.
-  - **Key Takeaways:** 3–4 high-yield bullet points summarizing core concepts and real-world significance.
-  - **Study Flashcards:** 3–5 automatically generated interactive 3D flip-cards for active revision.
-  - **Full Clean Text:** Complete article with citation markers and brackets cleanly stripped.
-- **🛡️ Academic SafeSearch & Smart Auto-Resolution:**
-  - Enforces an academic content safety filter suppressing adult and non-scholarly suggestions.
-  - Smart auto-resolution connects query variations (e.g., `"generating AI"`) directly to canonical entries (**`Generative AI`**).
-- **♿ Inclusive Accessibility Suite:**
-  - Dyslexia-friendly typography toggle (`OpenDyslexic` font rules).
-  - High-contrast dark and light themes conforming to WCAG standards.
-  - Interactive font size scaling (`A-`, `A`, `A+`).
-- **💾 Persistence & Document Export:**
-  - Search history and bookmarked articles stored in a local SQLite database (`akira.db`).
-  - One-click downloadable **PDF Study Guides** (powered by ReportLab) and Markdown study notes.
-- **💸 100% Free & Open-Source:**
-  - Zero paid third-party API dependencies or subscription costs.
+Designed with accessibility and universal design at its core, AKIRA features **two-way voice navigation** (Speech-to-Text and Text-to-Speech), **synchronized sentence-level "karaoke" highlighting** for dyslexic and auditory learners, and an **academic SafeSearch filter**.
 
 ---
 
-## 🏗️ System Architecture
+## 🌟 Comprehensive Key Features
+
+### 1. 🎙️ Two-Way Voice Navigation
+* **Voice Search (Speech-to-Text):** Click-to-speak voice search powered by the browser's native `SpeechRecognition` interface.
+* **Live Transcription Feedback:** Transcribed words stream live into the search input box as you speak.
+* **Conversational Filler Stripping:** Intelligent regex pre-processor strips conversational phrases (*"what is"*, *"what's"*, *"tell me about"*, *"search for"*, *"who was"*, *"explain"*, *"define"*), converting natural spoken questions like *"what is generative AI"* into clean search queries.
+* **Locale & Accent Adaptation:** Automatically detects browser locale with support for Indian English (`en-IN`) and standard English accents.
+* **Interactive Audio Player (Text-to-Speech):** Complete playback controls (**Play**, **Pause**, **Resume**, **Stop**).
+* **Dynamic Live Speed Regulation:** Adjust speed smoothly via the slider or 4 instant preset chips (**`0.75x`**, **`1.0x`**, **`1.25x`**, **`1.5x`**)—the active sentence re-speaks at the new rate immediately without audio freezing.
+* **Voice Selector:** Dropdown menu dynamically enumerating all installed OS and browser synthesis voices.
+* **Keyboard Shortcut:** Press `Spacebar` anytime to toggle audio Play/Pause.
+
+### 2. ✨ Synchronized "Karaoke" Sentence Highlighting
+* **Live Visual Tracking:** Highlights the active spoken sentence in real-time with an accessible visual glow as the voice speaks.
+* **Dual-View Highlighting:** Works across both the **Executive Audio Recap** and the **Key Takeaways** tab views.
+* **Interactive Sentence Jumping:** Users can click on *any* individual sentence in the text or takeaways list to instantly jump audio playback to that exact spot.
+
+### 3. 🧠 Multi-Level Knowledge Synthesis & Study Tools
+* **Executive Audio Recap:** A concise 2–3 sentence summary engineered for a 1-minute audio brief.
+* **Key Takeaways:** 3–4 high-yield bullet points summarizing core concepts and real-world significance.
+* **Interactive 3D Study Flashcards:** 3–5 automatically generated revision cards (Definition, Mechanism, Applications, Historical Origins) with 3D flip animation and scrollable text containers to prevent overflow.
+* **Full Clean Text:** Complete article with citation brackets (`[1]`, `[citation needed]`, `== References ==`) cleanly stripped.
+
+### 4. 🛡️ Academic SafeSearch & Smart Auto-Resolution
+* **Academic Safety Filter:** Built-in regex blocklist that suppresses adult, NSFW, pornographic, vulgar, and slop suggestions/topics. Searches for explicit topics return: *"This topic is restricted under academic content safety guidelines."*
+* **Literary Safety Whitelist:** Preserves valid academic, literary, and historical subjects (e.g., *"Moby Dick"*, *"Philip K. Dick"*, *"Charles Dickens"*, *"oilseed rape"*).
+* **Smart Auto-Resolution:** If a query has a minor variation or typo (e.g., `"generating AI"`), AKIRA evaluates top search results using whole-word boundary matching and token overlap, automatically loading the canonical article (**`Generative AI`**) without error screens.
+
+### 5. ♿ Inclusive Accessibility Suite (WCAG Compliant)
+* **Dyslexia Font Mode:** One-click toggle applying high-legibility typographic styling (`OpenDyslexic` rules, expanded letter spacing, enhanced line-height).
+* **High-Contrast Dark / Light Themes:** Accessible color palettes meeting WCAG contrast ratios.
+* **Interactive Font Scaling:** Instant font magnification controls (**`A-`**, **`A`**, **`A+`**).
+* **Accessible Navigation:** Skip-to-content links and ARIA attributes for screen readers.
+
+### 6. 💾 Persistence, Slide-Over Library & Study Exports
+* **SQLite Relational Storage (`akira.db`):** Full CRUD management for search history and bookmarked articles.
+* **Slide-Over Side Drawer:** Quick-access slide-out library to browse saved bookmarks and past searches without leaving the active article.
+* **Formatted PDF Study Guide:** On-the-fly downloadable, multi-page PDF document generated with ReportLab, featuring executive summary callouts, bullet takeaways, and revision tables.
+* **Markdown Notes Export:** Downloadable `.md` study notes for personal knowledge bases (Notion, Obsidian).
+
+### 7. 💸 100% Free & Open-Source
+* Zero paid third-party API dependencies or subscription costs. Uses local Python services and browser-native APIs.
+
+---
+
+## 🏗️ Detailed System Architecture
+
+The architecture follows a modular **Model-View-Controller (MVC) / Client-Server** pattern matching the academic design diagrams:
 
 ```mermaid
 graph TD
-    User["User (Voice / Text)"]
-    WebUI["Accessible Web UI (HTML5, CSS3, Vanilla JS)"]
-    Mic["Speech-to-Text (SpeechRecognition)"]
-    TTS["Text-to-Speech (SpeechSynthesis + Karaoke)"]
-    Flask["Flask REST API Server (app.py)"]
-    DB[("SQLite Database (akira.db)")]
-    WikiNLP["Wikipedia & NLP Processor (wiki_service.py)"]
-    PDF["ReportLab PDF Generator (pdf_service.py)"]
+    subgraph Client ["Client Presentation Layer (Browser)"]
+        UI["Web UI (HTML5, Modern CSS3, Vanilla JS)"]
+        A11y["Accessibility Suite (Dyslexia Font, Contrast, Font Scaling)"]
+        STT["Speech-to-Text Engine (SpeechRecognition + Prefix Cleaner)"]
+        TTS["Text-to-Speech Engine (SpeechSynthesis + Dynamic Rate)"]
+        Karaoke["Karaoke Highlighter & Sentence Jump Listener"]
+        Flashcards["Interactive 3D Flashcard Deck"]
+        Drawer["Slide-Over Library (History & Bookmarks Drawer)"]
+    end
 
-    User -->|Voice / Click| WebUI
-    WebUI --> Mic
-    WebUI --> TTS
-    WebUI <-->|JSON REST API| Flask
-    Flask <--> DB
-    Flask <--> WikiNLP
-    Flask <--> PDF
-    WikiNLP <-->|MediaWiki API| WikiServer["Wikipedia Servers"]
+    subgraph Server ["Application Server Layer (Python Flask)"]
+        App["Flask REST API Server (app.py)"]
+        Routes["REST Endpoints (/api/search, /api/history, /api/bookmarks, /api/export-*)"]
+    end
+
+    subgraph Logic ["Business Logic & NLP Layer"]
+        WikiService["Wikipedia & NLP Engine (wiki_service.py)"]
+        SafeSearch["Academic SafeSearch & Profanity Filter"]
+        AutoResolve["Smart Query Auto-Resolver & Confidence Scorer"]
+        Synthesizer["Multi-Tier Synthesizer (Recap, Bullets, Flashcards)"]
+        Tokenizer["Abbreviation-Preserving Sentence Tokenizer"]
+        PDFService["ReportLab Flowable PDF Generator (pdf_service.py)"]
+    end
+
+    subgraph Storage ["Data & Persistence Layer"]
+        DBManager["SQLite Manager (db.py)"]
+        SQLiteDB[("SQLite Database: akira.db (history, bookmarks)")]
+    end
+
+    subgraph External ["External Services"]
+        WikiAPI["MediaWiki REST API (with Compliant User-Agent)"]
+    end
+
+    %% Client Interactions
+    UI --> STT
+    UI --> TTS
+    UI --> A11y
+    UI --> Karaoke
+    UI --> Flashcards
+    UI --> Drawer
+
+    %% Client to Server
+    UI <-->|HTTP / JSON REST API| Routes
+    Routes --> App
+
+    %% Server to Logic
+    App --> WikiService
+    App --> DBManager
+    App --> PDFService
+
+    %% Logic Submodules
+    WikiService --> SafeSearch
+    WikiService --> AutoResolve
+    WikiService --> Synthesizer
+    WikiService --> Tokenizer
+
+    %% External & Persistence
+    AutoResolve <-->|MediaWiki API| WikiAPI
+    WikiService <-->|Article Data| WikiAPI
+    DBManager <-->|SQL Queries| SQLiteDB
+    PDFService -->|PDF Binary Stream| App
 ```
 
 ---
@@ -127,7 +191,7 @@ pip install -r requirements.txt
 ---
 
 ### 5. Run the Automated Test Suite
-Before launching the server, you can verify that all 16 unit, integration, and safety tests pass:
+Before launching the server, verify that all 16 unit, integration, and safety tests pass:
 
 ```bash
 python test_akira.py
@@ -174,11 +238,11 @@ Once the application is running in your browser, test the key features:
 | **1. Voice Search (STT)** | Click the 🎙️ **Microphone** button and say: *"What is generative AI"* | Words appear live in the search bar; filler prefix *"what is"* is automatically removed and the article loads. |
 | **2. Text Search & Auto-Resolution** | Type `"generating AI"` and press **Search** | AKIRA automatically resolves minor typos and lands directly on **`Generative AI`**. |
 | **3. Audio Player & Speed** | Click the **▶ Play** button in the bottom floating deck | Speech begins reading the summary aloud. Click the preset chips (**`1.25x`** or **`1.5x`**) or move the slider—the audio speed updates immediately. |
-| **4. Karaoke Highlighting** | Watch the article text while audio is playing | Each spoken sentence is highlighted in blue in real-time as it is spoken. Click any sentence to jump playback to that spot. |
+| **4. Karaoke Highlighting & Jumping** | Watch the article text while audio is playing | Each spoken sentence is highlighted in blue in real-time. Click any sentence in the text to jump playback to that spot. |
 | **5. Interactive Flashcards** | Click on the **Study Flashcards** tab | Click on any card (or press Space) to flip it and reveal the key concept definition. |
 | **6. Academic SafeSearch** | Search for an explicit or non-academic term | The system safely catches it and displays: *"This topic is restricted under academic content safety guidelines."* |
 | **7. Accessibility Controls** | Click **Dyslexic Font**, **A- / A+**, or the **Theme** selector in the top bar | Typography instantly switches to dyslexia-friendly letter-spacing, text scales smoothly, and dark/light modes toggle cleanly. |
-| **8. Bookmarks & PDF Export** | Click **★ Bookmark** then **Download Study PDF** | Article is saved to SQLite history and a formatted study guide PDF downloads to your computer. |
+| **8. Bookmarks, Library & PDF Export** | Click **★ Bookmark**, open **Library**, then click **Download Study PDF** | Article is saved to SQLite, appears in the side drawer, and a formatted study guide PDF downloads to your computer. |
 
 ---
 
