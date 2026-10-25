@@ -273,35 +273,8 @@ Once the application is running in your browser, test the key features:
 ├── templates/
 │   └── index.html                          # Accessible single-page web dashboard
 │
-└── docs/                                   # Project reports, review chapters, & diagrams
-    ├── PROJECT_COMPREHENSIVE_REPORT.md     # Master project technical report
-    ├── AKIRA_Study_Artificial_intelligence.pdf # Sample generated study guide PDF
-    │
-    ├── Figure 4.1_ AKIRA System Architecture.svg # System architecture diagram
-    ├── Figure 4.2_Context-Level DFD of AKIRA.svg # DFD Level 0 (Context diagram)
-    ├── Figure 4.3_ Level 1 DFD of AKIRA.svg      # DFD Level 1 diagram
-    ├── Figure 4.4_ Use Case Diagram of AKIRA.svg # UML Use Case diagram
-    ├── Figure 4.5_ AKIRA Database ER Diagram.svg # Entity-Relationship diagram
-    ├── Activity Diagram.svg                      # System activity diagram
-    │
-    ├── Review files/                       # Complete MCA project documentation chapters
-    │   ├── Abstract - AKIRA.docx
-    │   ├── Analysis and Requirements - AKIRA.docx
-    │   ├── Appendices - AKIRA.docx
-    │   ├── Conclusion - AKIRA.docx
-    │   ├── Design - AKIRA.docx
-    │   ├── Implementation - AKIRA.docx
-    │   ├── Introduction - AKIRA.docx
-    │   ├── Problem Description_Modules Description - AKIRA.docx
-    │   ├── References - AKIRA.docx
-    │   ├── Testing - AKIRA.docx
-    │   └── Tools and Technologies - AKIRA.docx
-    │
-    └── Old files/                          # Initial project reference files
-        ├── Abstract.internship.pdf
-        ├── Intro.Internship.pdf
-        ├── REquirement.pdf
-        └── Search!.py                      # Original CLI prototype (archived)
+└── docs/                                   # Project documentation
+    └── PROJECT_COMPREHENSIVE_REPORT.md     # Master project technical report
 ```
 
 ---
@@ -334,3 +307,9 @@ This project is made publicly viewable on GitHub strictly for educational demons
 
 **Restrictions:**  
 No part of this software (including source code, styles, design, architecture, or documentation) may be copied, reproduced, modified, republished, distributed, sublicensed, sold, or used in any project without prior explicit written permission from the author.
+
+This project is made publicly viewable on GitHub strictly for educational demonstration, personal portfolio showcase, and academic evaluation purposes. 
+
+**Restrictions:**  
+No part of this software (including source code, styles, design, architecture, or documentation) may be copied, reproduced, modified, republished, distributed, sublicensed, sold, or used in any project without prior explicit written permission from the author.
+

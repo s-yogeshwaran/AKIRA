@@ -26,3 +26,9 @@ Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
 
+# Academic review documents & diagrams (kept private locally)
+docs/Review files/
+docs/Old files/
+docs/*.svg
+docs/*.pdf
+*.docx
