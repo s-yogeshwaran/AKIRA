@@ -308,8 +308,3 @@ This project is made publicly viewable on GitHub strictly for educational demons
 **Restrictions:**  
 No part of this software (including source code, styles, design, architecture, or documentation) may be copied, reproduced, modified, republished, distributed, sublicensed, sold, or used in any project without prior explicit written permission from the author.
 
-This project is made publicly viewable on GitHub strictly for educational demonstration, personal portfolio showcase, and academic evaluation purposes. 
-
-**Restrictions:**  
-No part of this software (including source code, styles, design, architecture, or documentation) may be copied, reproduced, modified, republished, distributed, sublicensed, sold, or used in any project without prior explicit written permission from the author.
-
