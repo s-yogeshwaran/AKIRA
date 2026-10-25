@@ -4,11 +4,11 @@
 [![Flask](https://img.shields.io/badge/framework-Flask-lightgrey.svg)](https://flask.palletsprojects.com/)
 [![Database](https://img.shields.io/badge/database-SQLite-green.svg)](https://www.sqlite.org/)
 [![Web Speech API](https://img.shields.io/badge/speech-Web%20Speech%20API-orange.svg)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary%20%2F%20All%20Rights%20Reserved-red.svg)](LICENSE)
 
-**AKIRA** (*Accessible Knowledge & Information Retrieval Assistant*) is an open-source, multi-modal knowledge portal and assistive study assistant. It transforms dense online encyclopedic entries into concise audio summaries, high-yield bullet takeaways, interactive 3D study flashcards, and exportable study notes.
+**AKIRA** (*Accessible Knowledge & Information Retrieval Assistant*) is an advanced, multi-modal knowledge portal and assistive study platform. It transforms dense online encyclopedic entries into concise audio summaries, high-yield bullet takeaways, interactive 3D study flashcards, and downloadable study notes.
 
-Designed with accessibility and universal design at its core, AKIRA features **two-way voice navigation** (Speech-to-Text and Text-to-Speech), **synchronized sentence-level "karaoke" highlighting** for dyslexic and auditory learners, and an **academic SafeSearch filter**.
+Designed with universal accessibility at its core, AKIRA features **two-way voice navigation** (Speech-to-Text and Text-to-Speech), **synchronized sentence-level "karaoke" highlighting** for dyslexic and auditory learners, and an **academic SafeSearch filter**.
 
 ---
 
@@ -52,8 +52,8 @@ Designed with accessibility and universal design at its core, AKIRA features **t
 * **Formatted PDF Study Guide:** On-the-fly downloadable, multi-page PDF document generated with ReportLab, featuring executive summary callouts, bullet takeaways, and revision tables.
 * **Markdown Notes Export:** Downloadable `.md` study notes for personal knowledge bases (Notion, Obsidian).
 
-### 7. 💸 100% Free & Open-Source
-* Zero paid third-party API dependencies or subscription costs. Uses local Python services and browser-native APIs.
+### 7. 🔒 Self-Contained & Free Architecture
+* Runs with zero paid third-party API dependencies or subscription costs, relying on robust local Python services and browser-native APIs.
 
 ---
 
@@ -246,35 +246,62 @@ Once the application is running in your browser, test the key features:
 
 ---
 
-## 📁 Project Structure
+## 📁 Up-to-Date Project Structure
 
 ```
 .
-├── app.py                      # Flask application server & REST endpoints
-├── db.py                       # SQLite database manager (CRUD operations)
-├── wiki_service.py             # Wikipedia API integration, NLP parser & SafeSearch
-├── pdf_service.py              # ReportLab study guide PDF generator
-├── requirements.txt            # Python dependencies
-├── test_akira.py               # Comprehensive 16-test automated verification suite
-├── .gitignore                  # Git ignore rules (excludes akira.db, __pycache__)
-├── README.md                   # Project documentation & setup instructions
+├── app.py                                  # Flask application server & REST endpoints
+├── db.py                                   # SQLite database manager (CRUD operations)
+├── wiki_service.py                         # Wikipedia API client, NLP parser & SafeSearch filter
+├── pdf_service.py                          # ReportLab study guide PDF generator
+├── requirements.txt                        # Python dependencies
+├── test_akira.py                           # Comprehensive 16-test automated verification suite
+├── .gitignore                              # Git ignore rules (excludes akira.db, __pycache__)
+├── LICENSE                                 # Proprietary & All Rights Reserved License
+├── README.md                               # Project documentation & setup instructions
+├── PROJECT_COMPREHENSIVE_REPORT.md         # Full project master report
 │
 ├── static/
 │   ├── css/
-│   │   ├── style.css           # Core styling, responsive layout, audio player deck
-│   │   └── accessibility.css   # Dyslexia typography, contrast themes, karaoke highlight
+│   │   ├── style.css                       # Core styling, responsive layout, audio player deck
+│   │   └── accessibility.css               # Dyslexia typography, contrast themes, karaoke highlight
 │   └── js/
-│       ├── api.js              # Asynchronous REST client
-│       ├── speech.js           # Two-way Web Speech API engine (STT & TTS)
-│       └── main.js             # UI controller and interactive event bindings
+│       ├── api.js                          # Asynchronous REST client
+│       ├── speech.js                       # Two-way Web Speech API engine (STT & TTS)
+│       └── main.js                         # UI controller, side drawer, interactive bindings
 │
 ├── templates/
-│   └── index.html              # Accessible single-page web dashboard
+│   └── index.html                          # Accessible single-page web dashboard
 │
-└── docs/                       # Project documentation & reference files
-    ├── ABSTRACT.md             # 1-page academic abstract
-    ├── PROJECT_COMPREHENSIVE_REPORT.md # Master project technical report
-    └── diagrams/               # System architecture and DFD diagrams
+└── docs/                                   # Project reports, review chapters, & diagrams
+    ├── PROJECT_COMPREHENSIVE_REPORT.md     # Master project technical report
+    ├── AKIRA_Study_Artificial_intelligence.pdf # Sample generated study guide PDF
+    │
+    ├── Figure 4.1_ AKIRA System Architecture.svg # System architecture diagram
+    ├── Figure 4.2_Context-Level DFD of AKIRA.svg # DFD Level 0 (Context diagram)
+    ├── Figure 4.3_ Level 1 DFD of AKIRA.svg      # DFD Level 1 diagram
+    ├── Figure 4.4_ Use Case Diagram of AKIRA.svg # UML Use Case diagram
+    ├── Figure 4.5_ AKIRA Database ER Diagram.svg # Entity-Relationship diagram
+    ├── Activity Diagram.svg                      # System activity diagram
+    │
+    ├── Review files/                       # Complete MCA project documentation chapters
+    │   ├── Abstract - AKIRA.docx
+    │   ├── Analysis and Requirements - AKIRA.docx
+    │   ├── Appendices - AKIRA.docx
+    │   ├── Conclusion - AKIRA.docx
+    │   ├── Design - AKIRA.docx
+    │   ├── Implementation - AKIRA.docx
+    │   ├── Introduction - AKIRA.docx
+    │   ├── Problem Description_Modules Description - AKIRA.docx
+    │   ├── References - AKIRA.docx
+    │   ├── Testing - AKIRA.docx
+    │   └── Tools and Technologies - AKIRA.docx
+    │
+    └── Old files/                          # Initial project reference files
+        ├── Abstract.internship.pdf
+        ├── Intro.Internship.pdf
+        ├── REquirement.pdf
+        └── Search!.py                      # Original CLI prototype (archived)
 ```
 
 ---
@@ -298,5 +325,12 @@ All data is stored locally in `akira.db` (SQLite) created automatically in the r
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+## 🔒 License & Copyright
+
+**Proprietary & All Rights Reserved.**  
+Copyright © 2026 **Yogeshwaran** ([@s-yogeshwaran](https://github.com/s-yogeshwaran)).
+
+This project is made publicly viewable on GitHub strictly for educational demonstration, personal portfolio showcase, and academic evaluation purposes. 
+
+**Restrictions:**  
+No part of this software (including source code, styles, design, architecture, or documentation) may be copied, reproduced, modified, republished, distributed, sublicensed, sold, or used in any project without prior explicit written permission from the author.
